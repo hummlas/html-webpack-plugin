@@ -216,6 +216,16 @@ HtmlWebpackPlugin.prototype.executeTemplate = function (templateFunction, chunks
         },
         compilation: compilation
       };
+
+      var templateVars = self.options && self.options.templateVars;
+      if (templateVars) {
+        for (var nextKey in self.options.templateVars) {
+          if (templateVars.hasOwnProperty(nextKey)) {
+            templateParams[nextKey] = templateVars[nextKey];
+          }
+        }
+      }
+
       var html = '';
       try {
         html = templateFunction(templateParams);
